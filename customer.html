@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Katana</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-control {
+
+            border-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!--Navbar Start-->
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark" style="z-index: 99;">
+            <div class="container-fluid justify-content-start"><a href="/"
+                    class="router-link-active router-link-exact-active navbar-brand font-monospace p-2 px-4"
+                    aria-current="page"><img src="src/katana.png" width="122" height="31" /></a><button
+                    class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                    aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse flex-grow-0" id="navbar">
+                    <div class="navbar-nav"><a href="/sales"
+                            class="nav-link d-flex flex-column align-items-center p-2 px-4"><i
+                                class="fa-solid fa-shop"></i> SELL </a><a href="/manufacturingorders"
+                            class="nav-link d-flex flex-column align-items-center p-2 px-4"><i
+                                class="fa-solid fa-thumbs-up"></i> MAKE </a><a href="/purchases"
+                            class="nav-link d-flex flex-column align-items-center p-2 px-4"><i
+                                class="fa-solid fa-basket-shopping"></i> BUY </a><a href="/inventory"
+                            class="nav-link d-flex flex-column align-items-center p-2 px-4"><i
+                                class="fa-solid fa-cube"></i> STOCK </a><a href="/products"
+                            class="nav-link d-flex flex-column align-items-center p-2 px-4"><i
+                                class="fa-solid fa-star"></i> ITEMS </a><a href="/contacts"
+                            class="nav-link d-flex flex-column align-items-center p-2 px-4"><i
+                                class="fa-solid fa-user-group"></i> CONTACTS </a><a href="/settings"
+                            class="nav-link d-flex flex-column align-items-center p-2 px-4"><i
+                                class="fa-solid fa-gear"></i> SETTINGS </a></div>
+                </div>
+                <div id="navbarAddBtn" class="dropdown ms-lg-0 ms-sm-auto"><button
+                        class="btn border-0 rounded-circle shadow" id="ddAddBtn" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"><i class="fa-solid fa-plus"></i></button>
+                    <div class="dropdown-menu" aria-labelledby="ddHelp" style="transform:translate(-40%, 0);"><a
+                            class="dropdown-item ddItem text-secondary py-2" href="#"><i class="fa-solid fa-plus"></i>
+                            Quote</a><a class="dropdown-item ddItem text-secondary py-2" href="#"><i
+                                class="fa-solid fa-plus"></i> Sales order</a><a
+                            class="dropdown-item ddItem text-secondary py-2" href="#"><i class="fa-solid fa-plus"></i>
+                            Manufacturing order</a><a class="dropdown-item ddItem text-secondary py-2" href="#"><i
+                                class="fa-solid fa-plus"></i> Purchase order</a><a
+                            class="dropdown-item ddItem text-secondary py-2" href="#"><i class="fa-solid fa-plus"></i>
+                            Stock adjustment</a><a class="dropdown-item ddItem text-secondary py-2" href="#"><i
+                                class="fa-solid fa-plus"></i> New product card</a><a
+                            class="dropdown-item ddItem text-secondary py-2" href="#"><i class="fa-solid fa-plus"></i>
+                            New material card</a><a class="dropdown-item ddItem text-secondary py-2"
+                            href="Customer.html"><i class="fa-solid fa-plus"></i> Customer</a></div>
+                </div>
+                <div class="text-white ms-auto me-2 dropdown flex-shrink-0"><a class="nav-link" id="ddHelp"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><i
+                            class="fa-solid fa-circle-question fa-2x"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="ddHelp"><a
+                            class="dropdown-item ddItem text-secondary py-2" href="#"><i
+                                class="fa-solid fa-graduation-cap"></i> Knowledge base</a><a
+                            class="dropdown-item ddItem text-secondary py-2" href="#"><i class="fa-solid fa-star"></i>
+                            What's new</a><a class="dropdown-item ddItem text-secondary py-2" href="#"><i
+                                class="fa-solid fa-code"></i> Developer portal</a><a
+                            class="dropdown-item ddItem text-secondary py-2" href="#"><i
+                                class="fa-solid fa-user-group"></i> Partner directory</a><a
+                            class="dropdown-item ddItem text-secondary py-2" href="#"><i
+                                class="fa-solid fa-message"></i> Chat with us</a></div>
+                </div>
+                <div class="me-2 flex-shrink-0"><a id="ddDemoBtn" class="btn border-0 shadow-none" aria-current="page"
+                        href="#"><i class="fa-solid fa-trash"></i> Demo Data </a></div>
+                <div class="text-white dropdown flex-shrink-0">
+                    <div class="nav-link d-inline-flex align-items-center" id="ddAccount" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                        <div class="d-flex flex-column align-items-end me-3"><span class="fw-bold">Test
+                                Company</span><span>Test Test</span></div><i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="ddAccount"><a href="/account"
+                            class="dropdown-item ddItem text-secondary py-2"><i class="fa-solid fa-city"></i>
+                            Account</a><a href="team.html" class="dropdown-item ddItem text-secondary py-2"><i
+                                class="fa-solid fa-user-group"></i> Team</a><a href="subscription.html"
+                            class="dropdown-item ddItem text-secondary py-2"><i class="fa-solid fa-book-bookmark"></i>
+                            Subscription</a>
+                        <hr class="dropdown-divider"><a class="dropdown-item ddItem text-secondary py-2" href="#"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!--Navbar End-->
+
+        <div class="card mx-3 mt-4">
+            <div class="card-header bg-white">
+                <p>Customer</p>
+                <b>{{fullName}}</b>
+            </div>
+            <div class="card-body" @input="yazdir">
+                <div class="container m-0">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="d-flex">
+                                <div>
+                                    <p class="text-secondary m-0">First Name</p>
+                                    <input id="fName"
+                                        class="form-control border-bottom rounded-0 border-tranparent shadow-none mb-4"
+                                        type="text" @input="this.fName=$event.target.value">
+                                </div>
+                                <div>
+                                    <p class="text-secondary ms-4 m-0">Last Name</p>
+                                    <input
+                                        class="form-control border-bottom rounded-0 border-tranparent shadow-none ms-4 mb-4"
+                                        type="text" @input="this.lName=$event.target.value">
+                                </div>
+                            </div>
+                            <p class="text-secondary m-0">Company Name</p>
+                            <input class="form-control border-bottom rounded-0 border-tranparent shadow-none mb-4"
+                                type="text" @input="this.cName=$event.target.value">
+                            <p class="text-secondary m-0">Display Name</p>
+                            <input :class="{}" class="form-control border-bottom rounded-0 shadow-none mb-4" type="text"
+                                v-model="fullName">
+                            <p class=" mb-0">Email</p>
+                            <div class="input-group flex-nowrap mb-4">
+                                <span
+                                    class="input-group-text rounded-0 shadow-none border-0 bg-transparent border-bottom text-secondary"
+                                    id="addon-wrapping"><i class="fa-regular fa-envelope"></i></span>
+                                <input type="email" class="form-control rounded-0 shadow-none border-0 border-bottom"
+                                    placeholder="" aria-label="Email" aria-describedby="addon-wrapping">
+                            </div>
+                            <p class="mb-0">Phone</p>
+                            <div class="input-group flex-nowrap mb-4">
+                                <span
+                                    class="input-group-text rounded-0 shadow-none border-0 bg-transparent border-bottom text-secondary"
+                                    id="addon-wrapping"><i class="fa-solid fa-phone"></i></span>
+                                <input type="text" class="form-control rounded-0 shadow-none border-0 border-bottom"
+                                    placeholder="" aria-label="Phone" aria-describedby="addon-wrapping">
+                            </div>
+                            <p class="text-secondary m-0">Comment</p>
+                            <input class="form-control border-bottom rounded-0 border-tranparent shadow-none mb-4"
+                                type="text">
+                        </div>
+                        <div class="col-8">
+                            <p class="mx-2 mb-0">Billing address</p>
+                            <div class="input-group flex-nowrap mb-4">
+                                <span
+                                    class="input-group-text rounded-0 shadow-none border-0 bg-transparent border-bottom text-secondary"
+                                    id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
+                                <input type="text"
+                                    class="form-control rounded-0 shadow-none border-0 border-bottom bg-transparent w-100"
+                                    id="billingAddress" placeholder="Enter address..." aria-label="Phone"
+                                    aria-describedby="addon-wrapping" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" v-model="bilName" disabled>
+                            </div>
+                            <!--billing addres modal-->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="d-flex mb-4">
+                                                <h6 class="modal-title text-dark" id="exampleModalLabel">Billing
+                                                    Address
+                                                </h6>
+                                            </div>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p class="mb-0">First Name</p>
+                                                        <input type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.bilFirst=$event.target.value">
+                                                        <p class="mb-0">last name</p>
+                                                        <input type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.bilLast=$event.target.value">
+                                                        <p class="mb-0">Company</p>
+                                                        <input type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.bilCompany=$event.target.value">
+                                                        <p class="mb-0">Phone</p>
+                                                        <input type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.bilPhone=$event.target.value">
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="mb-0">Address line 1</p>
+                                                        <input type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            placeholder="Enter street name"
+                                                            @input="this.bilAdd1=$event.target.value">
+                                                        <p class="mb-0">Address line 2</p>
+                                                        <input type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            placeholder="Address line 2(e.g..apartment,suite,unit,or,bulding)."
+                                                            @input="this.bilAdd2=$event.target.value">
+                                                        <p class="mb-0">City/Town</p>
+                                                        <input type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            placeholder="city,district,suburb,town,or village."
+                                                            @input="this.bilCity=$event.target.value">
+                                                        <div class="d-flex justify-content-between mb-4">
+                                                            <div class="col">
+                                                                <p class="mb-0">State/Region</p>
+                                                                <input type="text"
+                                                                    class="form-control border-bottom rounded-0 shadow-none"
+                                                                    placeholder="State,county,province,or region"
+                                                                    @input="this.bilState=$event.target.value">
+                                                            </div>
+                                                            <div class="col mx-4">
+                                                                <p class="mb-0">Zip/Postal Code</p>
+                                                                <input type="text"
+                                                                    class="form-control border-bottom rounded-0 shadow-none"
+                                                                    placeholder="Zip or postal code."
+                                                                    @input="this.bilZip=$event.target.value">
+                                                            </div>
+                                                        </div>
+                                                        <p class="mb-0">Country</p>
+                                                        <input type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.bilCountry=$event.target.value">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button"
+                                                    class="btn btn-secondary rounded-0 shadow-none border-0 bg-transparent text-primary"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" id="bilBut" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal" @click="bilStart">OK</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mx-2 mb-0">Default shipping address</p>
+                            <div class="input-group flex-nowrap mb-4 pt-0">
+                                <span
+                                    class="input-group-text rounded-0 shadow-none border-0 bg-transparent border-bottom text-secondary"
+                                    id="addon-wrapping"><i class="fa-solid fa-location-dot"></i></span>
+                                <input type="text"
+                                    class="form-control rounded-0 shadow-none border-0 border-bottom bg-transparent"
+                                    placeholder="Same as billing address"
+                                    aria-describedby="addon-wrapping" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal2" v-model="defName" disabled>
+                            </div>
+                            <!--Default addres modal-->
+                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="d-flex mb-4">
+                                                <h6 class="modal-title text-dark" id="exampleModalLabel">Shipping
+                                                    Address
+                                                </h6>
+                                            </div>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p class="mb-0">First Name</p>
+                                                        <input id="fDef" type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.defFirst=$event.target.value">
+                                                        <p class="mb-0">last name</p>
+                                                        <input id="lDef" type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.defLast=$event.target.value">
+                                                        <p class="mb-0">Company</p>
+                                                        <input id="cDef" type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.defCompany=$event.target.value">
+                                                        <p class="mb-0">Phone</p>
+                                                        <input id="phoneDef" type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.defPhone=$event.target.value">
+                                                    </div>
+                                                    <div class="col">
+                                                        <p class="mb-0">Address line 1</p>
+                                                        <input id="addDef1" type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.defAdd1=$event.target.value"
+                                                            placeholder="Enter street name">
+                                                        <p class="mb-0">Address line 2</p>
+                                                        <input id="addDef2" type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.defAdd2=$event.target.value"
+                                                            placeholder="Address line 2(e.g..apartment,suite,unit,or,bulding).">
+                                                        <p class="mb-0">City/Town</p>
+                                                        <input id="cityDef" type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.defCity=$event.target.value"
+                                                            placeholder="city,district,suburb,town,or village.">
+                                                        <div class="d-flex justify-content-between mb-4">
+                                                            <div class="col">
+                                                                <p class="mb-0">State/Region</p>
+                                                                <input id="stateDef" type="text"
+                                                                    class="form-control border-bottom rounded-0 shadow-none"
+                                                                    @input="this.defState=$event.target.value"
+                                                                    placeholder="State,county,province,or region">
+                                                            </div>
+                                                            <div class="col mx-4">
+                                                                <p class="mb-0">Zip/Postal Code</p>
+                                                                <input id="zipDef" type="text"
+                                                                    class="form-control border-bottom rounded-0 shadow-none"
+                                                                    @input="this.defZip=$event.target.value"
+                                                                    placeholder="Zip or postal code.">
+                                                            </div>
+                                                        </div>
+                                                        <p class="mb-0">Country</p>
+                                                        <input id="countryDef" type="text"
+                                                            class="form-control border-bottom rounded-0 shadow-none mb-3"
+                                                            @input="this.defCountry=$event.target.value">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button"
+                                                    class="btn btn-secondary rounded-0 shadow-none border-0 bg-transparent text-primary"
+                                                    da-ta-bs-dismiss="modal">Cancel</button>
+                                                <button id="defBut" type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal" @click="defStart">OK</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    fName: "",
+                    lName: "",
+                    cName: null,
+                    fullName: null,
+                    // billing address
+                    bilName: "",
+                    bilFirst: "",
+                    bilLast: "",
+                    bilCompany: "",
+                    bilPhone: "",
+                    bilAdd1: "",
+                    bilAdd2: "",
+                    bilCity: "",
+                    bilState: "",
+                    bilZip: "",
+                    bilCountry: "",
+                    // // default address
+                    defName: "",
+                    defFirst: "",
+                    defLast: "",
+                    defCompany: "",
+                    defPhone: "",
+                    defAdd1: "",
+                    defAdd2: "",
+                    defCity: "",
+                    defState: "",
+                    defZip: "",
+                    defCountry: "",
+                };
+            },
+            watch: {
+                fName(newValue, oldValue) {
+                    console.log(oldValue + "=>" + newValue)
+                }
+            },
+            methods: {
+                yazdir(event) {
+                    this.fullName = this.fName + " " + this.lName;
+                },
+                bilStart() {
+                    this.bilName = this.bilFirst + " " +
+                        this.bilLast + " " +
+                        this.bilCompany + " + " +
+
+                        this.bilAdd1 + " " +
+                        this.bilAdd2 + " " +
+                        this.bilCity + " " +
+                        this.bilState + " " +
+                        this.bilZip + " " +
+                        this.bilCountry + " - " +
+
+                        this.bilPhone;
+                },
+                defStart() {
+                    this.defName = this.defFirst + " " +
+                        this.defLast + " " +
+                        this.defCompany + " + " +
+
+                        this.defAdd1 + " " +
+                        this.defAdd2 + " " +
+                        this.defCity + " " +
+                        this.defState + " " +
+                        this.defZip + " " +
+                        this.defCountry + " - " +
+                        this.defPhone;
+                },
+            },
+        }).mount("#app");
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
